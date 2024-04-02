@@ -30,3 +30,4 @@ workflows:
       - test:
           requires:
             - build
+      - odc-backend
