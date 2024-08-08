@@ -1,15 +1,24 @@
 jobs:
   build:
+    docker:
+      - image: circleci/node:latest
+    resource_class: medium
     steps:
       - checkout
       - run: echo "This is a build step"    # similar to "script" in GitLab
 
   test:
+    docker:
+      - image: circleci/node:latest
+    resource_class: medium
     steps:
       - checkout
       - run: echo "This is a test step"
 
   integration:
+    docker:
+      - image: circleci/node:latest
+    resource_class: medium
     steps:
       - checkout
       - run:
@@ -18,22 +27,9 @@ jobs:
             exit 1
 
   prod:
+    docker:
+      - image: circleci/node:latest
+    resource_class: medium
     steps:
       - checkout
       - run: echo "This is a deploy step."
-
-workflows:
-  version: 2
-  rails:
-    jobs:
-      - build
-      - test:
-          requires:
-            - build 
-      - integration:
-          requires:
-            - test
-      - prod:
-          type: approval
-          requires:
-            - integration
